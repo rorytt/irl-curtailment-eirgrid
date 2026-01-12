@@ -1,0 +1,13 @@
+pandas
+numpy
+pyarrow
+openpyxl
+pydantic
+pyyaml
+geopandas
+shapely
+scikit-learn
+xarray
+netcdf4
+tqdm
+matplotlib
