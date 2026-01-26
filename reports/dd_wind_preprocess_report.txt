@@ -1,0 +1,42 @@
+DD Wind Preprocess Report
+==============================
+Raw file: data/raw/dd_national_halfhour_wind.xlsx
+Output file: data/processed/dd_national_hourly_wind.csv
+
+Raw rows: 17568
+Dropped rows (bad datetime): 0
+Dropped rows (bad dd_mwh): 0
+Negative dd_mwh rows (kept, flagged): 0
+Duplicate timestamps collapsed by sum: 2
+
+Inferred half-hour frequency (best effort): 30min
+Half-hour total (after cleaning): 638802.398000 MWh
+Hourly total: 638802.398000 MWh
+Total difference (hourly - halfhour): 0.000000 MWh
+Missing hourly timestamps in range: 0
+
+Hourly output head:
+                 datetime  dd_mwh
+2024-01-01 00:00:00+00:00  25.531
+2024-01-01 01:00:00+00:00  24.682
+2024-01-01 02:00:00+00:00   6.853
+2024-01-01 03:00:00+00:00   0.749
+2024-01-01 04:00:00+00:00   9.220
+2024-01-01 05:00:00+00:00   5.655
+2024-01-01 06:00:00+00:00   0.000
+2024-01-01 07:00:00+00:00   0.000
+2024-01-01 08:00:00+00:00   0.000
+2024-01-01 09:00:00+00:00   0.000
+
+Hourly output tail:
+                 datetime  dd_mwh
+2024-12-31 14:00:00+00:00 241.070
+2024-12-31 15:00:00+00:00 230.212
+2024-12-31 16:00:00+00:00 199.241
+2024-12-31 17:00:00+00:00 181.601
+2024-12-31 18:00:00+00:00 150.756
+2024-12-31 19:00:00+00:00 164.001
+2024-12-31 20:00:00+00:00 159.758
+2024-12-31 21:00:00+00:00 170.857
+2024-12-31 22:00:00+00:00 175.572
+2024-12-31 23:00:00+00:00 159.859

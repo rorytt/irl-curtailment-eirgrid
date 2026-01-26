@@ -1,0 +1,11 @@
+paths:
+  dd_hourly_nat: data/raw/dd_hourly_national.csv
+  dd_percent_monthly_region: data/raw/dd_percent_monthly_region.csv
+  generators: data/raw/generators.csv
+  wdt_nodes: data/raw/wdt_nodes.csv
+  era5_dir: data/raw/era5/
+
+params:
+  dmax_km: 30
+  other_node_clustering_km: 40
+  weight_sr_mode: "dd_percent" # later allow "scaled_targets"
