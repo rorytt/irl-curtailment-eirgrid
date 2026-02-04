@@ -137,7 +137,7 @@ def report_yearly(path: Path) -> str:
         else:
             lines.append(f"Expected hours for {y}: {exp} (matches)")
 
-        full = pd.date_range(t.min(), t.max(), freq="1H", tz="UTC")
+        full = pd.date_range(t.min(), t.max(), freq="1h", tz="UTC")
         missing = full.difference(t)
         if len(missing) > 0:
             time_ok = False

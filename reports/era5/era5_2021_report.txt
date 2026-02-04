@@ -1,0 +1,40 @@
+ERA5 YEARLY FILE REPORT
+Path: data/processed/era5_yearly/era5_2021.nc
+Size (MB): 38.93
+
+STRUCTURE
+Dimensions: {'time': 8760, 'latitude': 21, 'longitude': 29}
+Coordinates: ['time', 'latitude', 'longitude']
+Data variables: ['u100', 'v100', 't2m', 'ssrd']
+
+TIME CHECKS
+Time coordinate name: time
+Start: 2021-01-01 00:00:00+00:00
+End:   2021-12-31 23:00:00+00:00
+Count: 8760
+Years present: [2021]
+Frequency guess (first 200): h
+
+Expected hours for 2021: 8760 (matches)
+Missing hourly timestamps: 0
+
+VARIABLE PRESENCE
+All expected variables present: u100, v100, t2m, ssrd
+
+VARIABLE STATS
+u100: units=m s**-1, min=-29.379104614257812, max=35.979339599609375, mean=2.162992238998413, NaNs=0/5334840
+v100: units=m s**-1, min=-31.672119140625, max=31.413101196289062, mean=1.2954740524291992, NaNs=0/5334840
+t2m: units=K, min=266.464111328125, max=303.08154296875, mean=284.0146789550781, NaNs=0/5334840
+ssrd: units=J m**-2, min=0.0, max=3343040.0, mean=434016.21875, NaNs=0/5334840
+
+DERIVED CHECKS
+ws100: units=m s**-1, min=0.00218461942858994, max=36.035804748535156, mean=8.53022289276123, NaNs=0/5334840
+ws100 sanity: PASS (non-negative)
+ghi_wm2: units=J m**-2, min=0.0, max=928.6221923828125, mean=120.56011199951172, NaNs=0/5334840
+ssrd sanity: PASS (non-negative min)
+GHI point diurnal check (center cell): fraction of night hours < 5 W/m2 = 0.979
+
+SUMMARY
+Time checks: PASS
+Derived checks: PASS
+If all checks pass and ranges look plausible for Ireland, the file is ready for CF calculations.

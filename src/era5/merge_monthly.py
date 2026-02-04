@@ -64,4 +64,4 @@ def merge_year(year: int) -> None:
 
 
 if __name__ == "__main__":
-    merge_year(2023)
+    merge_year(2021)

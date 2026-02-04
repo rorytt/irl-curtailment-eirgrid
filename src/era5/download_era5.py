@@ -110,4 +110,4 @@ def download_year(year: int) -> None:
 
 
 if __name__ == "__main__":
-    download_year(2023)
+    download_year(2021)

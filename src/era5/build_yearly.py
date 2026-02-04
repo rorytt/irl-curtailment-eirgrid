@@ -46,4 +46,4 @@ def build_year(year: int) -> Path:
 
 
 if __name__ == "__main__":
-    build_year(2023)
+    build_year(2021)
