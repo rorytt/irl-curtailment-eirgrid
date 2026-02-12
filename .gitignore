@@ -2,6 +2,10 @@
 __pycache__/
 *.pyc
 
+# outputs / diagnostics
+reports/*
+!reports/.gitkeep
+
 data/raw/
 data/processed/
 data/interim/
