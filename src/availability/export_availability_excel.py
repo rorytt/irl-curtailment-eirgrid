@@ -67,10 +67,6 @@ def make_region_tech_pivot(df_all: pd.DataFrame, region: str, tech: str) -> pd.D
 
 def main(years: Iterable[int], calibrated: bool, out_path: Path) -> None:
     years = list(years)
-    if 2021 not in years:
-        # user explicitly said 2021 is included
-        years = [2021] + years
-
     years = sorted(set(years))
 
     dfs = [read_region_availability(y, calibrated=calibrated) for y in years]
@@ -88,7 +84,7 @@ def main(years: Iterable[int], calibrated: bool, out_path: Path) -> None:
     # Excel cannot store tz-aware datetimes
     df_all = df_all.copy()
     df_all["datetime"] = pd.to_datetime(df_all["datetime"], utc=True).dt.tz_convert(None)
-    
+
     with pd.ExcelWriter(out_path, engine="openpyxl") as writer:
         # Sheet 1: long format (best for pivot tables in Excel)
         df_all.sort_values(["year", "datetime", "region", "technology"]).to_excel(
