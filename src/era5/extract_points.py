@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 from pathlib import Path
 from re import sub
 import pandas as pd
@@ -67,7 +68,7 @@ def haversine_km(lat1, lon1, lat2, lon2):
     a = np.sin(dlat/2)**2 + np.cos(lat1)*np.cos(lat2)*np.sin(dlon/2)**2
     return 2 * R * np.arcsin(np.sqrt(a))
 
-def mapping_distance_summary(wx: pd.DataFrame) -> tuple[float, float, float, int]:
+def mapping_distance_table(wx: pd.DataFrame) -> pd.DataFrame:
     # one row per node
     m = (wx[["node_id","node_lat","node_lon","era5_lat","era5_lon"]]
          .drop_duplicates("node_id")
@@ -75,6 +76,10 @@ def mapping_distance_summary(wx: pd.DataFrame) -> tuple[float, float, float, int
 
     dist_km = haversine_km(m["node_lat"], m["node_lon"], m["era5_lat"], m["era5_lon"])
     m["dist_km"] = dist_km
+    return m
+
+def mapping_distance_summary(wx: pd.DataFrame) -> tuple[float, float, float, int]:
+    m = mapping_distance_table(wx)
 
     # count how many unique ERA5 gridpoints used
     n_gridpoints = m.drop_duplicates(["era5_lat","era5_lon"]).shape[0]
@@ -129,11 +134,24 @@ def sanity_check(wx: pd.DataFrame) -> str:
     dmin, dmean, dmax, ngrid = mapping_distance_summary(wx)
     lines.append(f"Mapping dist (km): min={dmin:.2f}, mean={dmean:.2f}, max={dmax:.2f}")
     lines.append(f"Mapped ERA5 gridpoints: {ngrid} (nodes={wx['node_id'].nunique()})")
+    m = mapping_distance_table(wx)
+    max_nodes = (
+        m.loc[np.isclose(m["dist_km"], dmax, atol=1e-9), ["node_id", "dist_km"]]
+        .sort_values("node_id")
+    )
+    max_nodes_txt = ", ".join(
+        f"{row.node_id} ({row.dist_km:.2f} km)" for row in max_nodes.itertuples(index=False)
+    )
+    lines.append(f"Max-distance node(s): {max_nodes_txt}")
 
     return "\n".join(lines)
 
 if __name__ == "__main__":
-    year = 2021
+    parser = argparse.ArgumentParser(description="Extract ERA5 weather data at node locations.")
+    parser.add_argument("--year", type=int, required=True, help="Year to extract data for (e.g., 2021, 2025)")
+    args = parser.parse_args()
+    
+    year = args.year
 
     nodes = pd.read_csv("data/raw/nodes.csv")
     era5_path = Path(f"data/processed/era5_yearly/era5_{year}.nc")
@@ -161,4 +179,3 @@ if __name__ == "__main__":
 
     print(f"Wrote {out_path}")
    
-

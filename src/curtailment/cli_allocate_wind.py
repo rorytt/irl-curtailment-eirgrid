@@ -52,11 +52,20 @@ def main():
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    df_region_hour.to_parquet(out_dir / "wind_curtailment_region_hour.parquet", index=False)
-    df_node_hour.to_parquet(out_dir / "wind_curtailment_node_hour.parquet", index=False)
-    df_meta_month.to_parquet(out_dir / "wind_curtailment_meta_month.parquet", index=False)
+    years_tag = "y" + "_".join(str(y) for y in sorted(set(years)))
 
-    print(f"Saved outputs to: {out_dir}")
+    df_region_hour.to_parquet(
+        out_dir / f"wind_curtailment_region_hour_{years_tag}.parquet", index=False
+    )
+    df_node_hour.to_parquet(
+        out_dir / f"wind_curtailment_node_hour_{years_tag}.parquet", index=False
+    )
+    df_meta_month.to_parquet(
+        out_dir / f"wind_curtailment_meta_month_{years_tag}.parquet", index=False
+    )
+
+    print(f"Saved outputs to: {out_dir} (tag: {years_tag})")
+
 
 
 if __name__ == "__main__":

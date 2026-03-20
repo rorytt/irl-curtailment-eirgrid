@@ -6,6 +6,7 @@ __pycache__/
 reports/*
 !reports/.gitkeep
 
+src/era5
 data/raw/
 data/processed/
 data/interim/
